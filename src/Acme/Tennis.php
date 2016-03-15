@@ -24,8 +24,7 @@ class Tennis
     {
         if($this->hasAWinner())
         {
-            return 'Win for John Doe';
-            /*return 'Win for '. $this->winner()->name;*/
+            return 'Win for '. $this->winner()->name;
         }
 
         $score = $this->lookup[$this->player1->points]. '-';
@@ -41,5 +40,12 @@ class Tennis
     private function tied()
     {
         return $this->player1->points == $this->player2->points;
+    }
+
+    public function winner()
+    {
+        return $this->player1->points > $this->player2->points
+                ? $this->player1
+                : $this->player2;
     }
 }
