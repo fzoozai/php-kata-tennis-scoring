@@ -1,0 +1,20 @@
+<?php
+
+namespace Acme;
+
+class Player {
+    public $name;
+    public $ponts;
+
+    public function __construct($name, $points)
+    {
+        $this->points = $points;
+        $this->name = $name;
+    }
+
+    public function earnPoints($points)
+    {
+        $this->points = $points;
+    }
+
+}
