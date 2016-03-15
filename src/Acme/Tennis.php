@@ -4,6 +4,15 @@ namespace Acme;
 
 class Tennis
 {
+    protected $player1;
+    protected $player2;
+    protected $lookup = [
+        0 => 'Love',
+        1 => 'Fifteen',
+        2 => 'Thirty',
+        3 => 'Forty'
+    ];
+
     public function __construct($player1, $player2)
     {
         $this->player1 = $player1;
@@ -13,12 +22,24 @@ class Tennis
 
     public function score()
     {
-        if($this->player1->points == 2 && $this->player2->points == 0){
-            return 'Thirty-Love';
+        if($this->hasAWinner())
+        {
+            return 'Win for John Doe';
+            /*return 'Win for '. $this->winner()->name;*/
         }
-        if($this->player1->points == 1 && $this->player2->points == 0){
-            return 'Fifteen-Love';
-        }
-        return 'Love-All';
+
+        $score = $this->lookup[$this->player1->points]. '-';
+        return $score .= $this->tied() ? 'All' : $this->lookup[$this->player2->points];
+    }
+
+    private function hasAWinner()
+    {
+        return (max([$this->player1->points, $this->player2->points]) >= 4) &&
+        (abs($this->player1->points - $this->player2->points >= 2));
+    }
+
+    private function tied()
+    {
+        return $this->player1->points == $this->player2->points;
     }
 }
