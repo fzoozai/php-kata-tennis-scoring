@@ -11,4 +11,9 @@ class TennismatchSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Acme\Tennismatch');
     }
+
+    function it_scores_a_scoreless_game()
+    {
+        $this->score()->shouldReturn('Love-All');
+    }
 }
